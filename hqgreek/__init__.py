@@ -1,3 +1,6 @@
-from .classes import Verb
+import conjugations
+import declensions
 
-__all__ = ['Verb']
+from .classes import Verb, Noun, Adjective
+
+__all__ = ['Verb', 'Noun', 'Adjective', 'conjugations', 'declensions']
