@@ -1,3 +1,4 @@
 from hqgreek import Verb
+from hqgreek.conjugations import omega
 
-paideuw = Verb()
+paideuw = Verb(present=(omega.present, 'παιδευ'))
