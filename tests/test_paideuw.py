@@ -1,9 +1,8 @@
 from context import hqgreek
 from context import hqvocab
 
-from hqgreek import conjugations
 from hqgreek.conjugations import omega
+from hqgreek.morphology import *
 
 def test_omega_present():
-  # TODO: make this real
-  assert conjugations.omega.present('παιδευ') == 'παιδεύω'
+  assert omega.present('παιδευ', [FIRST, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == ['παιδεύω']

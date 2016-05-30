@@ -1,0 +1,39 @@
+class InvalidMorphologyError(Exception):
+  pass
+
+# Constants used to describe morphology.
+# Person
+FIRST = 0
+SECOND = 1
+THIRD = 2
+# Number
+SINGULAR = 3
+PLURAL = 4
+# Tense
+PRESENT = 5
+PERFECT = 6
+IMPERFECT = 7
+AORIST = 8
+PLUPERFECT = 9
+FUTURE = 10
+FUTUREPERFECT = 11
+# Mood
+INDICATIVE = 12
+IMPERATIVE = 13
+SUBJUNCTIVE = 14
+OPTATIVE = 15
+# Other forms
+INFINITIVE = 16
+PARTICIPLE = 17
+# Voice
+ACTIVE = 18
+PASSIVE = 19
+# Gender
+MASCULINE = 20
+FEMININE = 21
+NEUTER = 22
+# Case
+NOMINATIVE = 23
+GENITIVE = 24
+DATIVE = 25
+ACCUSATIVE = 26

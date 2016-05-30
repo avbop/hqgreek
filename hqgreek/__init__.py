@@ -1,6 +1,6 @@
 import logging
 
-from .classes import Verb, Noun, Adjective
+from .classes import *
 
 __all__ = ['Verb', 'Noun', 'Adjective']
 
