@@ -1,8 +1,12 @@
 TESTDIR=tests
+DOCDIR=docs
 
-all: test
+all: doc
 
 test:
 	cd $(TESTDIR) && py.test
 
-.PHONY: all, test
+doc:
+	echo blah > $(DOCDIR)/index
+
+.PHONY: all, test, doc
