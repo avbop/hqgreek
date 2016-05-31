@@ -1,7 +1,0 @@
-.venv
-*.pyc
-*/__pycache__/*
-*.swp
-**/.cache/*
-docs/_build
-docs/api
