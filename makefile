@@ -7,6 +7,8 @@ test:
 	cd $(TESTDIR) && py.test
 
 doc:
-	echo blah > $(DOCDIR)/index
+	sphinx-apidoc -o $(DOCDIR)/api hqgreek
+	sphinx-apidoc -o $(DOCDIR)/api hqvocab
+	cd $(DOCDIR) && make html
 
 .PHONY: all, test, doc
