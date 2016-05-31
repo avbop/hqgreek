@@ -3,6 +3,7 @@ DOCDIR=docs
 SPHINX_API=sphinx-apidoc --no-toc --force -o $(DOCDIR)/api
 
 all: doc
+travis: test doc
 
 test:
 	cd $(TESTDIR) && py.test
@@ -16,4 +17,4 @@ clean:
 	rm -r $(DOCDIR)/api
 	rm -r $(DOCDIR)/_build
 
-.PHONY: all, test, doc, clean
+.PHONY: all, test, doc, clean, travis
