@@ -1,5 +1,6 @@
 TESTDIR=tests
 DOCDIR=docs
+WEBDIR=web
 SPHINX_API=sphinx-apidoc --no-toc --force -o $(DOCDIR)/api
 TMPDIR=/tmp/hqgreek
 REPO_URL=git@github.com:avbop/hqgreek.git
@@ -18,7 +19,9 @@ doc:
 site: doc
 	mkdir $(TMPDIR)
 	cd $(TMPDIR) && git clone -b gh-pages $(REPO_URL)
-	cp -r docs/_build/html/* $(TMPDIR)/hqgreek
+	cp -r $(WEBDIR)/* $(TMPDIR)/hqgreek
+	mkdir $(TMPDIR)/hqgreek/docs
+	cp -r $(DOCDIR)/_build/html $(TMPDIR)/hqgreek/docs
 	cd $(TMPDIR)/hqgreek && git add .
 	cd $(TMPDIR)/hqgreek && git commit -m "Updating site via makefile."
 	cd $(TMPDIR)/hqgreek && git push -u origin gh-pages
