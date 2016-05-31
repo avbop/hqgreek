@@ -12,6 +12,7 @@ class Word:
     """
     return None
 
+
 class Verb(Word):
   """Represent a verb."""
 
@@ -37,6 +38,7 @@ class Verb(Word):
     else:
       raise InvalidMorphologyError
 
+
 class Noun(Word):
   """Represent a noun."""
 
@@ -50,6 +52,7 @@ class Noun(Word):
     morph: a list of constants from hqgreek.morphology
     """
     pass
+
 
 class Adjective(Word):
   """Represent an adjective."""
