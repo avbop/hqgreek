@@ -1,4 +1,4 @@
-from hqgreek.morphology import *
+import hqgreek.morphology as m
 
 class Word:
   """A parent class for different types of words.
@@ -30,31 +30,42 @@ class Word:
   def _morphology(self, morph):
     return None
 
-  def _morph_many(self, requested_forms, current_form, generated_words):
+  def _morph_many(self, requested_forms, current_form, generated_words,
+                  generated_translations):
     if len(requested_forms) == 0:
       try:
-        generated_words.extend(self.morphology(current_form))
-      except InvalidMorphologyError:
+        generated_words.append(self.morphology(current_form))
+        generated_translations.append(m.expand_form(current_form))
+      except m.InvalidMorphologyError:
         pass
     else:
       for form in requested_forms[0]:
         current_form.append(form)
-        self._morph_many(requested_forms[1:], current_form, generated_words)
+        self._morph_many(requested_forms[1:], current_form, generated_words,
+                         generated_translations)
         current_form.remove(form)
 
-  def many_forms(self, forms):
+  def many_forms(self, forms, include_translations=False):
     """Return all of the forms described by forms.
 
     forms: a tuple of lists, where each list is a list of morphology constants;
       for example: ([FIRST], [SINGULAR, PLURAL], [PRESENT, IMPERFECT],
       [INDICATIVE], [ACTIVE, PASSIVE])
+    include_translations: whether to return translations of forms. If False
+      (default), return just a list of words. If True, return a tuple: (list of
+      words, list of translations).
     """
     words = []
-    self._morph_many(forms, [], words)
-    return words
+    translations = []
+    self._morph_many(forms, [], words, translations)
+    if include_translations:
+      return (words, translations)
+    else:
+      return words
 
-  def all_forms(self):
-    return self.many_forms(self._all_forms_tuple)
+  def all_forms(self, include_translations=False):
+    return self.many_forms(self._all_forms_tuple,
+        include_translations=include_translations)
 
 
 class Verb(Word):
@@ -68,10 +79,10 @@ class Verb(Word):
     """
     self._present_func = present[0]
     self._present_base = present[1]
-    self._all_forms_tuple = ([FIRST, SECOND, THIRD], [SINGULAR, PLURAL],
-        [PRESENT, IMPERFECT, PERFECT, AORIST, PLUPERFECT, FUTURE,
-        FUTUREPERFECT], [SUBJUNCTIVE, OPTATIVE, INDICATIVE, INFINITIVE,
-        IMPERATIVE], [PASSIVE, ACTIVE, MIDDLE])
+    self._all_forms_tuple = ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,
+        m.PLURAL], [m.PRESENT, m.IMPERFECT, m.PERFECT, m.AORIST, m.PLUPERFECT,
+        m.FUTURE, m.FUTUREPERFECT], [m.SUBJUNCTIVE, m.OPTATIVE, m.INDICATIVE,
+        m.INFINITIVE, m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE])
 
   def _morphology(self, morph):
     return self.conjugate(morph)
@@ -81,10 +92,10 @@ class Verb(Word):
 
     morph: a list of constants from hqgreek.morphology
     """
-    if PRESENT in morph:
+    if m.PRESENT in morph:
       return self._present_func(self._present_base, morph)
     else:
-      raise InvalidMorphologyError
+      raise m.InvalidMorphologyError
 
 
 class Noun(Word):

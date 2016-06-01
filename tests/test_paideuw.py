@@ -13,5 +13,12 @@ def test_hqvocab():
 
 def test_many_forms():
   assert hqvocab.paideuw.many_forms(([FIRST, SECOND], [PRESENT], [INDICATIVE],
-    [ACTIVE], [SINGULAR, PLURAL])) == ['παιδεύω', 'παιδεύομεν', 'παιδεύεις',
-    'παιδεύετε']
+      [ACTIVE], [SINGULAR, PLURAL])) ==\
+      [['παιδεύω'], ['παιδεύομεν'], ['παιδεύεις'], ['παιδεύετε']]
+  assert hqvocab.paideuw.many_forms(([FIRST, SECOND], [PRESENT], [INDICATIVE],
+      [ACTIVE], [SINGULAR, PLURAL]), include_translations=True) ==\
+      ([['παιδεύω'], ['παιδεύομεν'], ['παιδεύεις'], ['παιδεύετε']],
+      ['first singular present indicative active',
+       'first plural present indicative active',
+       'second singular present indicative active',
+       'second plural present indicative active'])
