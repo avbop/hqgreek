@@ -3,38 +3,45 @@ class InvalidMorphologyError(Exception):
 
 # Constants used to describe morphology.
 # Person
-FIRST = 0
-SECOND = 1
-THIRD = 2
+FIRST = (0, 'first')
+SECOND = (1, 'second')
+THIRD = (2, 'third')
 # Number
-SINGULAR = 10
-PLURAL = 11
+SINGULAR = (10, 'singular')
+PLURAL = (11, 'plural')
 # Tense
-PRESENT = 20
-PERFECT = 21
-IMPERFECT = 22
-AORIST = 23
-PLUPERFECT = 24
-FUTURE = 25
-FUTUREPERFECT = 26
+PRESENT = (20, 'present')
+PERFECT = (21, 'perfect')
+IMPERFECT = (22, 'imperfect')
+AORIST = (23, 'aorist')
+PLUPERFECT = (24, 'pluperfect')
+FUTURE = (25, 'future')
+FUTUREPERFECT = (26, 'futureperfect')
 # Mood
-INDICATIVE = 30
-IMPERATIVE = 31
-SUBJUNCTIVE = 32
-OPTATIVE = 33
+INDICATIVE = (30, 'indicative')
+IMPERATIVE = (31, 'imperative')
+SUBJUNCTIVE = (32, 'subjunctive')
+OPTATIVE = (33, 'optative')
 # Other forms
-INFINITIVE = 40
-PARTICIPLE = 41
+INFINITIVE = (40, 'infinitive')
+PARTICIPLE = (41, 'participle')
 # Voice
-ACTIVE = 50
-PASSIVE = 51
-MIDDLE = 52
+ACTIVE = (50, 'active')
+PASSIVE = (51, 'passive')
+MIDDLE = (52, 'middle')
 # Gender
-MASCULINE = 60
-FEMININE = 61
-NEUTER = 62
+MASCULINE = (60, 'masculine')
+FEMININE = (61, 'feminine')
+NEUTER = (62, 'neuter')
 # Case
-NOMINATIVE = 70
-GENITIVE = 71
-DATIVE = 72
-ACCUSATIVE = 73
+NOMINATIVE = (70, 'nominative')
+GENITIVE = (71, 'genitive')
+DATIVE = (72, 'dative')
+ACCUSATIVE = (73, 'accusative')
+
+def expand_form(morph):
+  """Give an expanded English phrasing of morph."""
+
+  morph.sort()
+
+  return ' '.join([form[1] for form in morph])
