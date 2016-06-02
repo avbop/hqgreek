@@ -1,12 +1,13 @@
 TESTDIR=tests
 DOCDIR=docs
 WEBDIR=web
+JSONDIR=$(WEBDIR)/data
 SPHINX_API=sphinx-apidoc --no-toc --force -o $(DOCDIR)/api
 TMPDIR=/tmp/hqgreek
 REPO_URL=git@github.com:avbop/hqgreek.git
 
-all: doc
-travis: test doc
+all: doc json
+travis: test doc json
 
 test:
 	cd $(TESTDIR) && py.test
@@ -16,7 +17,11 @@ doc:
 	$(SPHINX_API) hqvocab
 	cd $(DOCDIR) && make html
 
-site: doc
+json:
+	mkdir -p $(JSONDIR)
+	python3 generate_website_data.py $(JSONDIR)
+
+site: doc json
 	mkdir $(TMPDIR)
 	cd $(TMPDIR) && git clone -b gh-pages $(REPO_URL)
 	cd $(TMPDIR)/hqgreek && git rm -rf * && git commit -m "Clearing gh-pages via makefile."
@@ -31,5 +36,7 @@ site: doc
 clean:
 	rm -r $(DOCDIR)/api
 	rm -r $(DOCDIR)/_build
+	rm -r $(JSONDIR)
 
-.PHONY: all, test, doc, clean, travis
+.PHONY: all, test, doc, clean, travis, json
+.IGNORE: clean
