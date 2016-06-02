@@ -4,7 +4,7 @@ import sys
 import hqvocab
 from hqgreek.morphology import *
 
-FILE_TEMPLATE = '{outdir}/unit{unit:02d}.json'
+FILE_TEMPLATE = '{outdir}/unit{unit:d}.json'
 
 PERSONS = [FIRST, SECOND, THIRD]
 NUMBERS = [SINGULAR, PLURAL]
