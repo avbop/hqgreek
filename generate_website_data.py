@@ -34,11 +34,25 @@ if __name__ == '__main__':
   for i in range(1, 3):
     required_data = []
     for word in required[i]:
-      data = word[0].many_forms(word[1:],
-                                include_translations=True)
-      # TODO: make this work.
+      data = word[0].many_forms(word[1:])
+      for words in data:
+        for word in words:
+          required_data.append(word)
     optional_data = []
-    all_data = []
+    for word in optional[i]:
+      data = word[0].many_forms(word[1:])
+      for words in data:
+        for word in words:
+          optional_data.append(word)
+    all_data = {}
+    all_words_list = [_[0] for _ in required[i]]
+    all_words_list.extend([_[0] for _ in optional[i]])
+    all_words = set(all_words_list)
+    for word in all_words:
+      word_lists, translations = word.all_forms(include_translations=True)
+      for j, words in enumerate(word_lists):
+        for word in words:
+          all_data[word] = translations[j]
 
     data = {}
     data['required'] = required_data
