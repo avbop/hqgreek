@@ -16,6 +16,7 @@ doc:
 	$(SPHINX_API) hqgreek
 	$(SPHINX_API) hqvocab
 	cd $(DOCDIR) && make html
+	cp -r $(DOCDIR)/_build/html $(WEBDIR)/docs
 
 json:
 	mkdir -p $(JSONDIR)
@@ -33,7 +34,7 @@ site: doc json
 	rm -rf $(TMPDIR)
 	git pull
 
-server: json
+server: json doc
 	cd $(WEBDIR) && python3 -m http.server 8080
 
 clean:
