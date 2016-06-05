@@ -54,7 +54,10 @@ if __name__ == '__main__':
       word_lists, translations = word.all_forms(include_translations=True)
       for j, words in enumerate(word_lists):
         for word in words:
-          all_data[word] = translations[j]
+          if word in all_data:
+            all_data[word] += '<br/>{}'.format(translations[j])
+          else:
+            all_data[word] = translations[j]
 
     data = {}
     data['required'] = required_data
