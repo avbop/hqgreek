@@ -30,6 +30,7 @@ hqgreek.downloadUnit = function (num) {
 
 // Display a word from the unit in localStorage.
 hqgreek.displayUnit = function () {
+  document.getElementById("selectUnit").value = hqgreek.getItem('unit');
   if (hqgreek.getItem("words").length > 0) {
     document.getElementById("answer").style.display = "none";
     document.getElementById("answerButtons").style.display = "none";
