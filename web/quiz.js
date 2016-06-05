@@ -36,7 +36,7 @@ hqgreek.displayUnit = function () {
     document.getElementById("answerButtons").style.display = "none";
     hqgreek.current = Math.floor(Math.random() * hqgreek.getItem("words").length);
     var word = hqgreek.getItem("words")[hqgreek.current];
-    document.getElementById("question").innerHTML = word;
+    document.getElementById("question").innerHTML = '<a href="http://www.perseus.tufts.edu/hopper/morph?l=' + word + '&la=greek">' + word + '</a>';
     document.getElementById("answer").innerHTML = hqgreek.getItem("all")[word];
     document.getElementById("questionButtons").style.display = "block";
   } else {
