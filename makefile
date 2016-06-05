@@ -41,5 +41,5 @@ clean:
 	rm -r $(DOCDIR)/_build
 	rm -r $(JSONDIR)
 
-.PHONY: all, test, doc, clean, travis, json
+.PHONY: all, test, doc, clean, travis, json, server
 .IGNORE: clean
