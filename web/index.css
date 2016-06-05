@@ -1,0 +1,7 @@
+#questionButtons, #answerButtons {
+  display: none;
+}
+
+#answer {
+  display: none;
+}

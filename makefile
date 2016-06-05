@@ -33,6 +33,9 @@ site: doc json
 	rm -rf $(TMPDIR)
 	git pull
 
+server: json
+	cd $(WEBDIR) && python3 -m http.server 8080
+
 clean:
 	rm -r $(DOCDIR)/api
 	rm -r $(DOCDIR)/_build
