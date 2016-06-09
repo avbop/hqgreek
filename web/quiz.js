@@ -38,8 +38,9 @@ hqgreek.displayUnit = function () {
     document.getElementById("answer").style.display = "none";
     document.getElementById("answerButtons").style.display = "none";
     var word = hqgreek.getItem("words")[hqgreek.getItem("current")];
-    document.getElementById("question").innerHTML = '<a href="http://www.perseus.tufts.edu/hopper/morph?l=' + word + '&la=greek" target="_blank">' + word + '</a>';
-    document.getElementById("answer").innerHTML = hqgreek.getItem("all")[word];
+    document.getElementById("question").innerHTML = word;
+    document.getElementById("perseus").href = "http://www.perseus.tufts.edu/hopper/morph?l=" + word + "&la=greek";
+    document.getElementById("answerText").innerHTML = hqgreek.getItem("all")[word];
     document.getElementById("questionButtons").style.display = "block";
   } else {
     document.getElementById("questionButtons").style.display = "none";
