@@ -7,7 +7,7 @@ paideuw = Verb(present=(omega.present, 'παιδευ'))
 keleuw = Verb(present=(omega.present, 'κελευ'))
 """The verb κελεύω."""
 
-luw = Verb(present=(omega.present, 'λυ'))
+luw = Verb(present=(omega.present, 'λυ-'))
 """The verb λύω."""
 
 pempw = Verb(present=(omega.present, 'πεμπ'))
