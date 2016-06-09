@@ -1,0 +1,22 @@
+hqgreek.conjugations package
+============================
+
+Submodules
+----------
+
+hqgreek.conjugations.omega module
+---------------------------------
+
+.. automodule:: hqgreek.conjugations.omega
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: hqgreek.conjugations
+    :members:
+    :undoc-members:
+    :show-inheritance:
