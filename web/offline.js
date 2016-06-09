@@ -1,6 +1,6 @@
 "use strict";
 
-var CACHE = 'c';
+var CACHE = 'd';
 
 this.addEventListener("install", function(event) {
   event.waitUntil(
@@ -11,6 +11,7 @@ this.addEventListener("install", function(event) {
         "index.html",
         "quiz.js",
         "index.css",
+        "favicon.png",
         "data/unit1.json",
         "data/unit2.json"
       ]);

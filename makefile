@@ -22,7 +22,12 @@ json:
 	mkdir -p $(JSONDIR)
 	python3 generate_website_data.py $(JSONDIR)
 
-site: doc json
+$(WEBDIR)/favicon.png: $(WEBDIR)/favicon.svg
+	inkscape -D -e $@ -w 16 -h 16 $<
+
+sitedata: doc json $(WEBDIR)/favicon.png
+
+site: sitedata
 	mkdir $(TMPDIR)
 	cd $(TMPDIR) && git clone -b gh-pages $(REPO_URL)
 	cd $(TMPDIR)/hqgreek && git rm -rf * && git commit -m "Clearing gh-pages via makefile."
@@ -34,13 +39,15 @@ site: doc json
 	rm -rf $(TMPDIR)
 	git pull
 
-server: json doc
+server: sitedata
 	cd $(WEBDIR) && python3 -m http.server 8080
 
 clean:
 	rm -r $(DOCDIR)/api
 	rm -r $(DOCDIR)/_build
 	rm -r $(JSONDIR)
+	rm -r $(WEBDIR)/docs
+	rm -r $(WEBDIR)/favicon.png
 
-.PHONY: all, test, doc, clean, travis, json, server
+.PHONY: all, test, doc, clean, travis, json, server, sitedata
 .IGNORE: clean
