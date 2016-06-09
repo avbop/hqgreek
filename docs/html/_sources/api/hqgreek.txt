@@ -1,0 +1,46 @@
+hqgreek package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+
+    hqgreek.conjugations
+    hqgreek.declensions
+
+Submodules
+----------
+
+hqgreek.accent module
+---------------------
+
+.. automodule:: hqgreek.accent
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+hqgreek.classes module
+----------------------
+
+.. automodule:: hqgreek.classes
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+hqgreek.morphology module
+-------------------------
+
+.. automodule:: hqgreek.morphology
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: hqgreek
+    :members:
+    :undoc-members:
+    :show-inheritance:
