@@ -93,17 +93,25 @@ hqgreek.isVisible = function (id) {
 
 // On page load.
 (function () {
+  // Prep data for offline access.
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('offline.js', { scope: './' }).then(function(reg) {
+      console.log('Registration succeeded. Scope is ' + reg.scope);
+    }).catch(function(error) {
+      console.log('Registration failed with ' + error);
+    });
+  }
   document.getElementById("showButton").onclick = hqgreek.showButton;
   document.getElementById("doneButton").onclick = hqgreek.doneButton;
   document.getElementById("againButton").onclick = hqgreek.againButton;
   document.getElementById("selectUnit").onchange = hqgreek.selectUnit;
   document.onkeypress = function (e) {
     e = e || window.event;
-    if (e.keyCode == 115 && hqgreek.isVisible("questionButtons")) { // "s"
+    if (e.key === 's' && hqgreek.isVisible("questionButtons")) {
       hqgreek.showButton();
-    } else if (e.keyCode == 100 && hqgreek.isVisible("answerButtons")) { // "d"
+    } else if (e.key === 'd' && hqgreek.isVisible("answerButtons")) {
       hqgreek.doneButton();
-    } else if (e.keyCode == 97 && hqgreek.isVisible("answerButtons")) { // "a"
+    } else if (e.key === 'a' && hqgreek.isVisible("answerButtons")) {
       hqgreek.againButton();
     }
   };
