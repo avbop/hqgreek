@@ -19,7 +19,7 @@ this.addEventListener("install", function(event) {
 });
 
 this.addEventListener("fetch", function(event) {
-  if (event.request.url.indexOf('fonts.googleapis.com') !== -1) {
+  if (event.request.url.indexOf('fonts') !== -1) {
     return fetch(event.request);
   } else {
     event.respondWith(caches.match(event.request).catch(function() {
