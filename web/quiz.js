@@ -1,9 +1,7 @@
 "use strict";
 
 // Namespace.
-var hqgreek = {
-  current: -1
-};
+var hqgreek = {};
 
 // Download a unit and load into localStorage. Then load it onto the page.
 hqgreek.downloadUnit = function (num) {
@@ -23,9 +21,14 @@ hqgreek.downloadUnit = function (num) {
     hqgreek.setItem("words", words);
     hqgreek.setItem("all", data.all);
     hqgreek.setItem("unit", num);
+    hqgreek.selectNewWord();
     hqgreek.displayUnit();
   };
   r.send()
+};
+
+hqgreek.selectNewWord = function () {
+  hqgreek.setItem("current", Math.floor(Math.random() * hqgreek.getItem("words").length));
 };
 
 // Display a word from the unit in localStorage.
@@ -34,8 +37,7 @@ hqgreek.displayUnit = function () {
   if (hqgreek.getItem("words").length > 0) {
     document.getElementById("answer").style.display = "none";
     document.getElementById("answerButtons").style.display = "none";
-    hqgreek.current = Math.floor(Math.random() * hqgreek.getItem("words").length);
-    var word = hqgreek.getItem("words")[hqgreek.current];
+    var word = hqgreek.getItem("words")[hqgreek.getItem("current")];
     document.getElementById("question").innerHTML = '<a href="http://www.perseus.tufts.edu/hopper/morph?l=' + word + '&la=greek" target="_blank">' + word + '</a>';
     document.getElementById("answer").innerHTML = hqgreek.getItem("all")[word];
     document.getElementById("questionButtons").style.display = "block";
@@ -55,8 +57,9 @@ hqgreek.showButton = function () {
 
 hqgreek.doneButton = function () {
   var words = hqgreek.getItem("words");
-  words.splice(hqgreek.current, 1);
+  words.splice(hqgreek.getItem("current"), 1);
   hqgreek.setItem("words", words);
+  hqgreek.selectNewWord();
   hqgreek.displayUnit();
 };
 
