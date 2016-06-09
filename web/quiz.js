@@ -96,7 +96,7 @@ hqgreek.isVisible = function (id) {
   // Prep data for offline access.
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("offline.js", { scope: "./" }).then(function(reg) {
-      console.log("Registration succeeded. Scope is " + reg.scope);
+      console.log("Registration successful. Scope is " + reg.scope);
     }).catch(function(error) {
       console.log("Registration failed with " + error);
     });
