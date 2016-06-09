@@ -6,7 +6,7 @@ SPHINX_API=sphinx-apidoc --no-toc --force -o $(DOCDIR)/api
 TMPDIR=/tmp/hqgreek
 REPO_URL=git@github.com:avbop/hqgreek.git
 
-all: doc json
+all: test doc json site
 travis: test doc json
 
 test:
