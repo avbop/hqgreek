@@ -8,17 +8,21 @@
   margin-top: 100px;
 }
 
-#questionButtons, #answerButtons {
+#questionButtons, #answerButtons, #question, #answer {
   display: none;
-  font-size: 1.1em;
+  margin-top: 30px;
 }
 
-#question, #answer {
-  font-size: 1.2em;
+#question {
+  display: block;
 }
 
-#answer {
-  display: none;
+.interface-text {
+  font-size: 1.3em;
+}
+
+select, button {
+  font-size: 0.9em;
 }
 
 footer {
@@ -36,7 +40,7 @@ div {
   text-align: center;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 600px) {
   div {
     width: 100%;
   }
@@ -45,7 +49,7 @@ div {
     margin-top: 20px;
   }
 
-  #question, #answer, button {
-    font-size: 2em;
+  .interface-text {
+    font-size: 2.5em;
   }
 }
