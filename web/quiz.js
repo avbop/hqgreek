@@ -94,13 +94,21 @@ hqgreek.isVisible = function (id) {
 // On page load.
 (function () {
   // Prep data for offline access.
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('offline.js', { scope: './' }).then(function(reg) {
-      console.log('Registration succeeded. Scope is ' + reg.scope);
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("offline.js", { scope: "./" }).then(function(reg) {
+      console.log("Registration succeeded. Scope is " + reg.scope);
     }).catch(function(error) {
-      console.log('Registration failed with ' + error);
+      console.log("Registration failed with " + error);
     });
   }
+  // Display features in footer.
+  var features = "Progress saved";
+  if ("serviceWorker" in navigator) {
+    features += " and offline access available";
+  }
+  features += " on this device. | ";
+  document.getElementById("features").innerHTML = features;
+  // Set up buttons.
   document.getElementById("showButton").onclick = hqgreek.showButton;
   document.getElementById("doneButton").onclick = hqgreek.doneButton;
   document.getElementById("againButton").onclick = hqgreek.againButton;
