@@ -64,6 +64,7 @@ hqgreek.doneButton = function () {
 };
 
 hqgreek.againButton = function () {
+  hqgreek.selectNewWord();
   hqgreek.displayUnit();
 };
 
