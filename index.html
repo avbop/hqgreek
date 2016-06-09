@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>hqgreek</title>
+  <link rel="stylesheet" type="text/css" href="index.css"/>
+</head>
+
+<body>
+  <div id="units" class="interface-text">
+    Unit: <select id="selectUnit">
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+  <div id="question" class="interface-text"></div>
+  <div id="answer" class="interface-text">
+    <span id="answerText"></span>
+    <a href="" id="perseus">(Perseus)</a>
+  </div>
+  <div id="questionButtons" class="interface-text">
+    <button id="showButton" type="button">Show answer</button>
+  </div>
+  <div id="answerButtons" class="interface-text">
+    <button id="doneButton" type="button">Done</button>
+    <button id="againButton" type="button">Again</button>
+  </div>
+  <footer>
+    Keyboard controls: <b>s</b>how, <b>a</b>gain, <b>d</b>one |
+    Progress is saved on this device. |
+    <a href="https://github.com/avbop/hqgreek/issues">Bugs &amp; requests</a>
+  </footer>
+  <script type="text/javascript" src="quiz.js"></script>
+</body>
+
+</html>
