@@ -1,0 +1,22 @@
+hqgreek.declensions package
+===========================
+
+Submodules
+----------
+
+hqgreek.declensions.first module
+--------------------------------
+
+.. automodule:: hqgreek.declensions.first
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: hqgreek.declensions
+    :members:
+    :undoc-members:
+    :show-inheritance:
