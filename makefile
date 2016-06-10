@@ -28,6 +28,8 @@ $(WEBDIR)/favicon.png: $(WEBDIR)/favicon.svg
 sitedata: doc json $(WEBDIR)/favicon.png
 
 site: sitedata
+	# Make sure we're on the master branch.
+	git branch --no-color | grep "* master"
 	mkdir $(TMPDIR)
 	cd $(TMPDIR) && git clone -b gh-pages $(REPO_URL)
 	cd $(TMPDIR)/hqgreek && git rm -rf * && git commit -m "Clearing gh-pages via makefile."
