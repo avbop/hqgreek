@@ -28,3 +28,15 @@ def test_recessive_accent():
   assert accent.accentuate('ἐπαυσω', accent.RECESSIVE) == 'ἐπαύσω'
   assert accent.accentuate('παυσον', accent.RECESSIVE) == 'παῦσον'
   assert accent.accentuate('παυσῃ', accent.RECESSIVE) == 'παύσῃ'
+
+def test_persistent_accent():
+  # Examples from H&Q p10.
+  assert accent.accentuate('βιβλιον', accent.PERSISTENT_PENULT_ACUTE) == 'βιβλίον'
+  assert accent.accentuate('βιβλιου', accent.PERSISTENT_PENULT_ACUTE) == 'βιβλίου'
+  assert accent.accentuate('ἀνθρωπος', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'ἄνθρωπος'
+  assert accent.accentuate('ἀνθρωπου', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'ἀνθρώπου'
+  assert accent.accentuate('νησος', accent.PERSISTENT_PENULT_CIRCUMFLEX) == 'νῆσος'
+  assert accent.accentuate('νησου', accent.PERSISTENT_PENULT_CIRCUMFLEX) == 'νήσου'
+  assert accent.accentuate('δρα-μα', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'δρᾶμα'
+  assert accent.accentuate('δρα-ματος', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'δράματος'
+  assert accent.accentuate('δρα-ματων', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'δραμάτων'
