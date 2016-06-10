@@ -113,6 +113,7 @@ hqgreek.isVisible = function (id) {
   document.getElementById("doneButton").onclick = hqgreek.doneButton;
   document.getElementById("againButton").onclick = hqgreek.againButton;
   document.getElementById("selectUnit").onchange = hqgreek.selectUnit;
+  document.getElementById("reset").onclick = hqgreek.selectUnit;
   document.onkeypress = function (e) {
     e = e || window.event;
     if (e.key === 's' && hqgreek.isVisible("questionButtons")) {
