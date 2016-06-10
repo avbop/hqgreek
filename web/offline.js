@@ -1,6 +1,6 @@
 "use strict";
 
-var CACHE = "p";
+var CACHE = "q";
 
 this.addEventListener("install", function(event) {
   event.waitUntil(
@@ -20,7 +20,8 @@ this.addEventListener("install", function(event) {
 
 this.addEventListener("fetch", function(event) {
   if (event.request.url.indexOf("fonts") !== -1 ||
-      event.request.url.indexOf("offline.js") !== -1) {
+      event.request.url.indexOf("offline.js") !== -1 ||
+      event.request.url.indexOf("docs") !== -1) {
     event.respondWith(fetch(event.request));
   } else {
     event.respondWith(caches.match(event.request).catch(function() {
