@@ -2,59 +2,42 @@
 RECESSIVE = 0
 PERSISTENT_ULT_ACUTE = 1
 PERSISTENT_ULT_CIRCUMFLEX = 2
-PERSISTENT_PENULT_CIRCUMFLEX = 3
-PERSISTENT_PENULT_ACUTE = 4
-PERSISTENT_ANTEPENULT_ACUTE = 5
+PERSISTENT_PENULT = 3
+PERSISTENT_ANTEPENULT = 4
 
 def accentuate(word, accent):
   """Return word accentuated according to the type of accent.
 
   word should be a word in Greek, with long ι, υ, α followed by a hyphen (-).
-  ᾳ can only be long and should not be followed by a hyphen.
+    ᾳ can only be long and should not be followed by a hyphen.
   accent should be one of the constants defined in this file.
   """
   syllables = _syllabify(word)
-  if accent == RECESSIVE:
-    cleaned_syllables = _recessive(syllables)
-  else:
-    cleaned_syllables = _persistent(syllables, accent)
-  return ''.join(cleaned_syllables)
-
-def _recessive(syllables):
-  """Give a word recessive accent."""
-  ret = []
+  antepenult_accents = [RECESSIVE, PERSISTENT_ANTEPENULT]
+  penult_accents = [RECESSIVE, PERSISTENT_ANTEPENULT, PERSISTENT_PENULT]
   accented = False
-  for i, syl in enumerate(syllables):
-    if not accented:
-      # Check antepenult.
-      if i == len(syllables) - 3:
-        if syllables[-1][1] == _SHORT:
-          ret.append(syl[0][:-1] + _acute(syl[0][-1]))
-          accented = True
-        else:
-          ret.append(syl[0])
-      # Check penult.
-      elif i == len(syllables) - 2:
-        if syl[1] == _LONG and syllables[-1][1] == _SHORT:
-          ret.append(syl[0][:-1] + _circumflex(syl[0][-1]))
-          accented = True
-        else:
-          ret.append(syl[0][:-1] + _acute(syl[0][-1]))
-          accented = True
-      # Check ult. We only get here with one-syllable words.
-      elif i == len(syllables) - 1:
-        # If we've gotten this far, it must be an acute on the ultima.
-        ret.append(syl[0][:-1] + _acute(syl[0][-1]))
-        accented = True
-      else:
-        ret.append(syl[0])
+  # Check antepenult.
+  if accent in antepenult_accents and len(syllables) >= 3:
+    if syllables[-1][1] == _SHORT:
+      newsyl = _accent_syllable(syllables[-3][0], _acute)
+      syllables[-3] = (newsyl, syllables[-3][1])
+      accented = True
+  # Check penult.
+  if accent in penult_accents and not accented and len(syllables) >= 2:
+    if syllables[-2][1] == _LONG and syllables[-1][1] == _SHORT:
+      newsyl = _accent_syllable(syllables[-2][0], _circumflex)
     else:
-      ret.append(syl[0])
-  return ret
-
-def _persistent(syllables, accent):
-  """Give a word persistent accent."""
-  pass
+      newsyl = _accent_syllable(syllables[-2][0], _acute)
+    syllables[-2] = (newsyl, syllables[-2][1])
+    accented = True
+  # Check ult.
+  if not accented and len(syllables) >= 1:
+    if accent == PERSISTENT_ULT_CIRCUMFLEX:
+      newsyl = _accent_syllable(syllables[-1][0], _circumflex)
+    else:
+      newsyl = _accent_syllable(syllables[-1][0], _acute)
+    syllables[-1] = (newsyl, syllables[-1][1])
+  return ''.join([_[0] for _ in syllables])
 
 def _syllabify(word):
   """Break word into a list of tuples (syllable, length)."""
@@ -87,6 +70,17 @@ def _syllabify(word):
 def _clean(text):
   """Clean up long letters coded with hyphens."""
   return text.replace('-', '')
+
+def _last_vowel(syllable):
+  """Return the index of the last vowel in the sequence of characters in syllable."""
+  for i in range(len(syllable) - 1, -1, -1):
+    if syllable[i] in _SHORT_VOWELS or syllable[i] in _LONG_VOWELS:
+      return i
+  return -1
+
+def _accent_syllable(syllable, accent_fn):
+  i = _last_vowel(syllable)
+  return syllable[:i] + accent_fn(syllable[i]) + syllable[i+1:]
 
 def _acute(letter):
   """Apply an acute accent to a letter."""

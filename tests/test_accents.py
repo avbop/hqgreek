@@ -31,12 +31,16 @@ def test_recessive_accent():
 
 def test_persistent_accent():
   # Examples from H&Q p10.
-  assert accent.accentuate('βιβλιον', accent.PERSISTENT_PENULT_ACUTE) == 'βιβλίον'
-  assert accent.accentuate('βιβλιου', accent.PERSISTENT_PENULT_ACUTE) == 'βιβλίου'
-  assert accent.accentuate('ἀνθρωπος', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'ἄνθρωπος'
-  assert accent.accentuate('ἀνθρωπου', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'ἀνθρώπου'
-  assert accent.accentuate('νησος', accent.PERSISTENT_PENULT_CIRCUMFLEX) == 'νῆσος'
-  assert accent.accentuate('νησου', accent.PERSISTENT_PENULT_CIRCUMFLEX) == 'νήσου'
-  assert accent.accentuate('δρα-μα', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'δρᾶμα'
-  assert accent.accentuate('δρα-ματος', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'δράματος'
-  assert accent.accentuate('δρα-ματων', accent.PERSISTENT_ANTEPENULT_ACUTE) == 'δραμάτων'
+  assert accent.accentuate('βιβλιον', accent.PERSISTENT_PENULT) == 'βιβλίον'
+  assert accent.accentuate('βιβλιου', accent.PERSISTENT_PENULT) == 'βιβλίου'
+  assert accent.accentuate('ἀνθρωπος', accent.PERSISTENT_ANTEPENULT) == 'ἄνθρωπος'
+  assert accent.accentuate('ἀνθρωπου', accent.PERSISTENT_ANTEPENULT) == 'ἀνθρώπου'
+  assert accent.accentuate('νησος', accent.PERSISTENT_PENULT) == 'νῆσος'
+  assert accent.accentuate('νησου', accent.PERSISTENT_PENULT) == 'νήσου'
+  assert accent.accentuate('δρα-μα', accent.PERSISTENT_ANTEPENULT) == 'δρᾶμα'
+  assert accent.accentuate('δρα-ματος', accent.PERSISTENT_ANTEPENULT) == 'δράματος'
+  assert accent.accentuate('δρα-ματων', accent.PERSISTENT_ANTEPENULT) == 'δραμάτων'
+  # Other test cases.
+  assert accent.accentuate('ἀδελφον', accent.PERSISTENT_ULT_ACUTE) == 'ἀδελφόν'
+  assert accent.accentuate('τον', accent.PERSISTENT_ULT_ACUTE) == 'τόν'
+  assert accent.accentuate('χρυ-σου', accent.PERSISTENT_ULT_CIRCUMFLEX) == 'χρυσοῦ'
