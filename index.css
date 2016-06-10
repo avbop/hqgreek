@@ -1,0 +1,55 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,700&subset=latin,greek,greek-ext,latin-ext);
+
+* {
+  font-family: 'Noto Serif', serif;
+}
+
+#selectUnit {
+  margin-top: 100px;
+}
+
+#questionButtons, #answerButtons, #question, #answer {
+  display: none;
+  margin-top: 30px;
+}
+
+#question {
+  display: block;
+}
+
+.interface-text {
+  font-size: 1.3em;
+}
+
+select, button {
+  font-size: 0.9em;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.9em;
+}
+
+div {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  div {
+    width: 100%;
+  }
+
+  #selectUnit {
+    margin-top: 20px;
+  }
+
+  .interface-text {
+    font-size: 2.5em;
+  }
+}
