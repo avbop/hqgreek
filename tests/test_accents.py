@@ -23,3 +23,8 @@ def test_recessive_accent():
   assert accent.accentuate('ἐπαιδευον', accent.RECESSIVE) == 'ἐπαίδευον'
   assert accent.accentuate('δεικνυ-μι', accent.RECESSIVE) == 'δείκνυμι'
   assert accent.accentuate('ἑορα-κα', accent.RECESSIVE) == 'ἑόρακα'
+  # Examples from H&Q p9.
+  assert accent.accentuate('ἐπαυσα', accent.RECESSIVE) == 'ἔπαυσα'
+  assert accent.accentuate('ἐπαυσω', accent.RECESSIVE) == 'ἐπαύσω'
+  assert accent.accentuate('παυσον', accent.RECESSIVE) == 'παῦσον'
+  assert accent.accentuate('παυσῃ', accent.RECESSIVE) == 'παύσῃ'
