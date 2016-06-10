@@ -1,11 +1,10 @@
 "use strict";
 
-var CACHE = 'e';
+var CACHE = "o";
 
 this.addEventListener("install", function(event) {
   event.waitUntil(
     caches.open(CACHE).then(function(cache) {
-      console.log("Loading cache with JSON files.");
       return cache.addAll([
         "./",
         "index.html",
@@ -20,11 +19,11 @@ this.addEventListener("install", function(event) {
 });
 
 this.addEventListener("fetch", function(event) {
-  if (event.request.url.indexOf('fonts') !== -1) {
-    return fetch(event.request);
+  if (event.request.url.indexOf("fonts") !== -1 ||
+      event.request.url.indexOf("offline.js") !== -1) {
+    event.respondWith(fetch(event.request));
   } else {
     event.respondWith(caches.match(event.request).catch(function() {
-      console.log("Missed cache.");
       return fetch(event.request);
     }));
   }
