@@ -52,12 +52,12 @@ if __name__ == '__main__':
     all_words = set(all_words_list)
     for word in all_words:
       word_lists, translations = word.all_forms(include_translations=True)
-      for j, words in enumerate(word_lists):
-        for word in words:
-          if word in all_data:
-            all_data[word] += '<br/>{}'.format(translations[j])
+      for j, forms in enumerate(word_lists):
+        for form in forms:
+          if form in all_data:
+            all_data[form] += ' OR<br/>{}: {}'.format(word.english, translations[j])
           else:
-            all_data[word] = translations[j]
+            all_data[form] = '{}: {}'.format(word.english, translations[j])
 
     data = {}
     data['required'] = required_data

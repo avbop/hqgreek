@@ -1,6 +1,6 @@
 "use strict";
 
-var CACHE = "o";
+var CACHE = "p";
 
 this.addEventListener("install", function(event) {
   event.waitUntil(
