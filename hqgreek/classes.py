@@ -6,8 +6,9 @@ class Word:
   This exists mostly to abstract the treatment of exceptions.
   """
 
-  def __init__(self):
+  def __init__(self, english=None):
     self._all_forms_tuple = ([])
+    self.english = english
 
   def _exception(self, morph):
     """Search the list of exceptions for the form given by morph.
@@ -71,12 +72,13 @@ class Word:
 class Verb(Word):
   """Represent a verb."""
 
-  def __init__(self, present=(None, None)):
+  def __init__(self, english=None, present=(None, None)):
     """Create a new verb, describing its morphology system.
 
     present: a tuple: (function from hqgreek.conjugations, base form of verb in
       present tense system)
     """
+    super().__init__(english=english)
     self._present_func = present[0]
     self._present_base = present[1]
     self._all_forms_tuple = ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,

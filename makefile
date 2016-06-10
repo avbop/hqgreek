@@ -27,7 +27,7 @@ $(WEBDIR)/favicon.png: $(WEBDIR)/favicon.svg
 
 sitedata: doc json $(WEBDIR)/favicon.png
 
-site: sitedata
+site: test sitedata
 	# Make sure we're on the master branch.
 	git branch --no-color | grep "* master"
 	mkdir $(TMPDIR)

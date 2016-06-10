@@ -1,14 +1,14 @@
 from hqgreek import Verb
 from hqgreek.conjugations import omega
 
-paideuw = Verb(present=(omega.present, 'παιδευ'))
+paideuw = Verb(english='educate', present=(omega.present, 'παιδευ'))
 """The verb παιδεύω."""
 
-keleuw = Verb(present=(omega.present, 'κελευ'))
+keleuw = Verb(english='command', present=(omega.present, 'κελευ'))
 """The verb κελεύω."""
 
-luw = Verb(present=(omega.present, 'λυ-'))
+luw = Verb(english='release, destroy', present=(omega.present, 'λυ-'))
 """The verb λύω."""
 
-pempw = Verb(present=(omega.present, 'πεμπ'))
+pempw = Verb(english='send', present=(omega.present, 'πεμπ'))
 """The verb πέμπω."""
