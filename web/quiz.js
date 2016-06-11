@@ -41,11 +41,14 @@ hqgreek.displayUnit = function () {
     document.getElementById("question").innerHTML = word;
     document.getElementById("perseus").href = "http://www.perseus.tufts.edu/hopper/morph?l=" + word + "&la=greek";
     document.getElementById("answerText").innerHTML = hqgreek.getItem("all")[word];
+    document.getElementById("remaining").innerHTML = hqgreek.getItem("words").length;
     document.getElementById("questionButtons").style.display = "block";
+    document.getElementById("remainingDiv").style.display = "block";
   } else {
     document.getElementById("questionButtons").style.display = "none";
     document.getElementById("answerButtons").style.display = "none";
     document.getElementById("answer").style.display = "none";
+    document.getElementById("remainingDiv").style.display = "none";
     document.getElementById("question").innerHTML = "Complete!";
   }
 };
