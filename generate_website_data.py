@@ -19,7 +19,10 @@ if __name__ == '__main__':
   optional = {}
   num_optional = {}
 
-  required[1] = []
+  required[1] = [
+      (hqvocab.paideuw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.pempw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE])
+      ]
   optional[1] = []
   num_optional[1] = 0
 
