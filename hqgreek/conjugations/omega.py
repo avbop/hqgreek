@@ -4,7 +4,7 @@ from hqgreek.morphology import *
 def present(root, morph):
   words = []
   if set([FIRST, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == set(morph):
-    words.append(root + 'ω')
+    words.append(root + 'ωs')
   elif set([SECOND, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == set(morph):
     words.append(root + 'εις')
   elif set([THIRD, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == set(morph):
