@@ -3,18 +3,38 @@ import hqgreek.morphology as m
 class Word:
   """A parent class for different types of words.
 
-  This exists mostly to abstract the treatment of exceptions.
+  This exists mostly to abstract the treatment of special forms.
   """
 
   def __init__(self, english=None):
     self._all_forms_tuple = ([])
     self.english = english
+    self._specials = dict()
 
-  def _exception(self, morph):
-    """Search the list of exceptions for the form given by morph.
+  def add_special(self, morph, form):
+    """Add a form that is an exception to the rules.
+
+    morph: a list of constants from hqgreek.morphology
+    form: the conjugated form matching morph
+    """
+    key = self._special_key(morph)
+    if key in self._specials:
+      self._specials[key].append(form)
+    else:
+      self._specials[key] = [form]
+
+  def _special_key(self, morph):
+    """Return a hashable key for the list of special forms."""
+    return m.expand_form(morph)
+
+  def _special(self, morph):
+    """Search the list of special forms for the form given by morph.
 
     morph: a list of constants from hqgreek.morphology
     """
+    key = self._special_key(morph)
+    if key in self._specials:
+      return self._specials[key]
     return None
 
   def morphology(self, morph):
@@ -22,9 +42,9 @@ class Word:
 
     Subclasses should define _morphology().
     """
-    exception = self._exception(morph)
-    if exception:
-      return exception
+    special = self._special(morph)
+    if special:
+      return special
     else:
       return self._morphology(morph)
 
@@ -87,18 +107,17 @@ class Verb(Word):
         m.INFINITIVE, m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE])
 
   def _morphology(self, morph):
-    return self.conjugate(morph)
+    if m.PRESENT in morph:
+      return self._present_func(self._present_base, morph)
+    else:
+      raise m.InvalidMorphologyError
 
   def conjugate(self, morph):
     """Conjugate the verb according to morph.
 
     morph: a list of constants from hqgreek.morphology
     """
-    if m.PRESENT in morph:
-      return self._present_func(self._present_base, morph)
-    else:
-      raise m.InvalidMorphologyError
-
+    return self.morphology(morph)
 
 class Noun(Word):
   """Represent a noun."""
@@ -108,14 +127,14 @@ class Noun(Word):
     pass
 
   def _morphology(self, morph):
-    return self.decline(morph)
+    pass
 
   def decline(self, morph):
     """Decline the noun according to morph.
 
     morph: a list of constants from hqgreek.morphology
     """
-    pass
+    return self.morphology(morph)
 
 
 class Adjective(Word):
@@ -126,11 +145,11 @@ class Adjective(Word):
     pass
 
   def _morphology(self, morph):
-    return self.decline(morph)
+    pass
 
   def decline(self, morph):
     """Decline the adjective according to morph.
 
     morph: a list of constants from hqgreek.morphology
     """
-    pass
+    return self.morphology(morph)

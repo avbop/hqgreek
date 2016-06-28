@@ -41,7 +41,5 @@ ACCUSATIVE = (73, 'accusative')
 
 def expand_form(morph):
   """Give an expanded English phrasing of morph."""
-
   morph.sort()
-
   return ' '.join([form[1] for form in morph])
