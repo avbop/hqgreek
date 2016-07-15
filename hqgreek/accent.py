@@ -14,10 +14,7 @@ def accentuate(word, accent, optative=False):
   optative: whether the word is in the optative (determines length of final
     diphthongs)
   """
-  syllables = _syllabify(word)
-  if syllables[-1][0][-2:] == 'αι' or syllables[-1][0][-2:] == 'οι' and not optative:
-    # In this case, the syllable is actually short.
-    syllables[-1] = (syllables[-1][0], _SHORT)
+  syllables = _syllabify(word, optative)
   antepenult_accents = [RECESSIVE, PERSISTENT_ANTEPENULT]
   penult_accents = [RECESSIVE, PERSISTENT_ANTEPENULT, PERSISTENT_PENULT]
   accented = False
@@ -44,7 +41,7 @@ def accentuate(word, accent, optative=False):
     syllables[-1] = (newsyl, syllables[-1][1])
   return ''.join([_[0] for _ in syllables])
 
-def _syllabify(word):
+def _syllabify(word, optative=False):
   """Break word into a list of tuples (syllable, length)."""
   syllables = []
   i = 0
@@ -70,6 +67,9 @@ def _syllabify(word):
       i += 1
   if current_syllable:
     syllables[-1] = (syllables[-1][0] + current_syllable, syllables[-1][1])
+  if syllables[-1][0][-2:] == 'αι' or syllables[-1][0][-2:] == 'οι' and not optative:
+    # In this case, the syllable is actually short.
+    syllables[-1] = (syllables[-1][0], _SHORT)
   return syllables
 
 def _clean(text):
