@@ -95,6 +95,7 @@ class Verb(Word):
   def __init__(self, english=None, present=(None, None)):
     """Create a new verb, describing its morphology system.
 
+    english: an English description of the word
     present: a tuple: (function from hqgreek.conjugations, base form of verb in
       present tense system)
     """
@@ -122,12 +123,31 @@ class Verb(Word):
 class Noun(Word):
   """Represent a noun."""
 
-  def __init__(self):
-    """Create a new noun, describing its morphology system."""
-    pass
+  def __init__(self, declension, gender=None, english=None):
+    """Create a new noun, describing its morphology system.
+
+    english: an English description of the word
+    declension: a tuple; the first item must be a declension function, and the
+      whole tuple will be passed as an argument to this function
+    """
+    super().__init__(english=english)
+    self._all_forms_tuple = ([m.FEMININE, m.MASCULINE, m.NEUTER], [m.SINGULAR,
+      m.PLURAL], [m.NOMINATIVE, m.GENITIVE, m.DATIVE, m.ACCUSATIVE])
+    self._declension = declension
+    self._gender = gender
 
   def _morphology(self, morph):
-    pass
+    genders = [m.MASCULINE, m.FEMININE, m.NEUTER]
+    genders.remove(self._gender)
+    for g in genders:
+      if g in morph:
+        raise m.InvalidMorphologyError
+    if self._gender not in morph:
+      morph.append(self._gender)
+    if self._declension:
+      return self._declension[0](self._declension, morph)
+    else:
+      raise m.InvalidMorphologyError
 
   def decline(self, morph):
     """Decline the noun according to morph.

@@ -5,5 +5,6 @@ sys.path.insert(0, os.path.abspath('..'))
 import hqgreek
 
 from .omega_verbs import paideuw, keleuw, luw, pempw
+from .first_declension_nouns import texnh, xwra
 
-__all__ = ['paideuw', 'keleuw', 'luw', 'pempw']
+__all__ = ['paideuw', 'keleuw', 'luw', 'pempw', 'texnh', 'xwra']
