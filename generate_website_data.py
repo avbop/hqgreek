@@ -8,7 +8,7 @@ FILE_TEMPLATE = '{outdir}/unit{unit:d}.json'
 
 PERSONS = [FIRST, SECOND, THIRD]
 NUMBERS = [SINGULAR, PLURAL]
-CASES = [NOMINATIVE, GENITIVE, DATIVE, ACCUSATIVE]
+CASES = [NOMINATIVE, GENITIVE, DATIVE, ACCUSATIVE, VOCATIVE]
 
 if __name__ == '__main__':
   if len(sys.argv) != 2:

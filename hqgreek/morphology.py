@@ -38,6 +38,7 @@ NOMINATIVE = (70, 'nominative')
 GENITIVE = (71, 'genitive')
 DATIVE = (72, 'dative')
 ACCUSATIVE = (73, 'accusative')
+VOCATIVE = (74, 'vocative')
 
 def expand_form(morph):
   """Give an expanded English phrasing of morph."""

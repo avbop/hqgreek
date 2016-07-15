@@ -7,20 +7,31 @@ import hqgreek.accent as a
 
 def test_first_eta():
   decl = (first.eta, 'τεχν', a.PERSISTENT_PENULT)
-  assert first.eta(decl, [SINGULAR, NOMINATIVE]) == ['τέχνη']
-  assert first.eta(decl, [SINGULAR, ACCUSATIVE]) == ['τέχνην']
-  assert first.eta(decl, [PLURAL, GENITIVE]) == ['τεχνῶν']
+  assert decl[0](decl, [FEMININE, SINGULAR, NOMINATIVE]) == ['τέχνη']
+  assert decl[0](decl, [FEMININE, SINGULAR, ACCUSATIVE]) == ['τέχνην']
+  assert decl[0](decl, [FEMININE, PLURAL, GENITIVE]) == ['τεχνῶν']
   decl = (first.eta, 'ψυ-χ', a.PERSISTENT_ULT_ACUTE)
-  assert first.eta(decl, [SINGULAR, GENITIVE]) == ['ψυχῆς']
+  assert decl[0](decl, [FEMININE, SINGULAR, GENITIVE]) == ['ψυχῆς']
 
 def test_first_alpha():
   decl = (first.alpha, 'χωρ', a.PERSISTENT_PENULT)
-  assert first.alpha(decl, [SINGULAR, NOMINATIVE]) == ['χώρα']
-  assert first.alpha(decl, [SINGULAR, ACCUSATIVE]) == ['χώραν']
-  assert first.alpha(decl, [PLURAL, GENITIVE]) == ['χωρῶν']
-  assert first.alpha(decl, [PLURAL, NOMINATIVE]) == ['χῶραι']
+  assert decl[0](decl, [FEMININE, SINGULAR, NOMINATIVE]) == ['χώρα']
+  assert decl[0](decl, [FEMININE, SINGULAR, ACCUSATIVE]) == ['χώραν']
+  assert decl[0](decl, [FEMININE, PLURAL, GENITIVE]) == ['χωρῶν']
+  assert decl[0](decl, [FEMININE, PLURAL, NOMINATIVE]) == ['χῶραι']
   decl = (first.alpha, 'ἀγορ', a.PERSISTENT_ULT_ACUTE)
-  assert first.alpha(decl, [SINGULAR, GENITIVE]) == ['ἀγορᾶς']
+  assert decl[0](decl, [FEMININE, SINGULAR, GENITIVE]) == ['ἀγορᾶς']
+
+def test_first_omicron():
+  decl = (first.omicron, 'λογ', a.PERSISTENT_PENULT)
+  assert decl[0](decl, [MASCULINE, SINGULAR, NOMINATIVE]) == ['λόγος']
+  assert decl[0](decl, [MASCULINE, SINGULAR, VOCATIVE]) == ['λόγε']
+  assert decl[0](decl, [MASCULINE, SINGULAR, ACCUSATIVE]) == ['λόγον']
+  assert decl[0](decl, [MASCULINE, PLURAL, GENITIVE]) == ['λόγων']
+  assert decl[0](decl, [MASCULINE, PLURAL, NOMINATIVE]) == ['λόγοι']
+  assert decl[0](decl, [MASCULINE, PLURAL, VOCATIVE]) == ['λόγοι']
+  decl = (first.omicron, 'ἀδελφ', a.PERSISTENT_ULT_ACUTE)
+  assert decl[0](decl, [MASCULINE, SINGULAR, GENITIVE]) == ['ἀδελφοῦ']
 
 def test_hqvocab():
   assert hqvocab.texne.decline([SINGULAR, DATIVE]) == ['τέχνῃ']

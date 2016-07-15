@@ -134,16 +134,16 @@ class Noun(Word):
     self._all_forms_tuple = ([m.FEMININE, m.MASCULINE, m.NEUTER], [m.SINGULAR,
       m.PLURAL], [m.NOMINATIVE, m.GENITIVE, m.DATIVE, m.ACCUSATIVE])
     self._declension = declension
-    self._gender = gender
+    self.gender = gender
 
   def _morphology(self, morph):
     genders = [m.MASCULINE, m.FEMININE, m.NEUTER]
-    genders.remove(self._gender)
+    genders.remove(self.gender)
     for g in genders:
       if g in morph:
         raise m.InvalidMorphologyError
-    if self._gender not in morph:
-      morph.append(self._gender)
+    if self.gender not in morph:
+      morph.append(self.gender)
     if self._declension:
       return self._declension[0](self._declension, morph)
     else:
