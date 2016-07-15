@@ -22,7 +22,7 @@ def test_first_alpha():
   decl = (first.alpha, 'ἀγορ', a.PERSISTENT_ULT_ACUTE)
   assert decl[0](decl, [FEMININE, SINGULAR, GENITIVE]) == ['ἀγορᾶς']
 
-def test_first_omicron():
+def test_first_omicron_masculine():
   decl = (first.omicron, 'λογ', a.PERSISTENT_PENULT)
   assert decl[0](decl, [MASCULINE, SINGULAR, NOMINATIVE]) == ['λόγος']
   assert decl[0](decl, [MASCULINE, SINGULAR, VOCATIVE]) == ['λόγε']
@@ -32,6 +32,16 @@ def test_first_omicron():
   assert decl[0](decl, [MASCULINE, PLURAL, VOCATIVE]) == ['λόγοι']
   decl = (first.omicron, 'ἀδελφ', a.PERSISTENT_ULT_ACUTE)
   assert decl[0](decl, [MASCULINE, SINGULAR, GENITIVE]) == ['ἀδελφοῦ']
+
+def test_first_omicron_neuter():
+  decl = (first.omicron, 'δωρ', a.PERSISTENT_PENULT)
+  assert decl[0](decl, [NEUTER, SINGULAR, NOMINATIVE]) == ['δῶρον']
+  assert decl[0](decl, [NEUTER, SINGULAR, VOCATIVE]) == ['δῶρον']
+  assert decl[0](decl, [NEUTER, SINGULAR, ACCUSATIVE]) == ['δῶρον']
+  assert decl[0](decl, [NEUTER, PLURAL, GENITIVE]) == ['δώρων']
+  assert decl[0](decl, [NEUTER, PLURAL, NOMINATIVE]) == ['δῶρα']
+  assert decl[0](decl, [NEUTER, PLURAL, ACCUSATIVE]) == ['δῶρα']
+  assert decl[0](decl, [NEUTER, PLURAL, VOCATIVE]) == ['δῶρα']
 
 def test_hqvocab():
   assert hqvocab.texne.decline([SINGULAR, DATIVE]) == ['τέχνῃ']
