@@ -5,14 +5,19 @@ PERSISTENT_ULT_CIRCUMFLEX = 2
 PERSISTENT_PENULT = 3
 PERSISTENT_ANTEPENULT = 4
 
-def accentuate(word, accent):
+def accentuate(word, accent, optative=False):
   """Return word accentuated according to the type of accent.
 
-  word should be a word in Greek, with long ι, υ, α followed by a hyphen (-).
-    ᾳ can only be long and should not be followed by a hyphen.
-  accent should be one of the constants defined in this file.
+  word: be a word in Greek, with long ι, υ, α followed by a hyphen (-).
+    ᾳ (etc) can only be long and should not be followed by a hyphen.
+  accent: be one of the constants defined in this file.
+  optative: whether the word is in the optative (determines length of final
+    diphthongs)
   """
   syllables = _syllabify(word)
+  if syllables[-1][0][-2:] == 'αι' or syllables[-1][0][-2:] == 'οι' and not optative:
+    # In this case, the syllable is actually short.
+    syllables[-1] = (syllables[-1][0], _SHORT)
   antepenult_accents = [RECESSIVE, PERSISTENT_ANTEPENULT]
   penult_accents = [RECESSIVE, PERSISTENT_ANTEPENULT, PERSISTENT_PENULT]
   accented = False
