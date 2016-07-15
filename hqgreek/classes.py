@@ -132,7 +132,7 @@ class Noun(Word):
     """
     super().__init__(english=english)
     self._all_forms_tuple = ([m.FEMININE, m.MASCULINE, m.NEUTER], [m.SINGULAR,
-      m.PLURAL], [m.NOMINATIVE, m.GENITIVE, m.DATIVE, m.ACCUSATIVE])
+      m.PLURAL], [m.NOMINATIVE, m.GENITIVE, m.DATIVE, m.ACCUSATIVE, m.VOCATIVE])
     self._declension = declension
     self.gender = gender
 

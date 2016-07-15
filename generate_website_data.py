@@ -26,11 +26,20 @@ if __name__ == '__main__':
       (hqvocab.texne, NUMBERS, CASES),
       (hqvocab.xwra, NUMBERS, CASES),
       (hqvocab.agora, NUMBERS, CASES),
-      (hqvocab.psuche, NUMBERS, CASES)
+      (hqvocab.psuche, NUMBERS, CASES),
+      (hqvocab.logos, NUMBERS, CASES),
+      (hqvocab.anthrwpos, NUMBERS, CASES),
+      (hqvocab.adelphos, NUMBERS, CASES),
+      (hqvocab.nesos, NUMBERS, CASES),
+      (hqvocab.dwron, NUMBERS, CASES),
       ]
   optional[1] = [
       (hqvocab.maxe, NUMBERS, CASES),
       (hqvocab.oikia, NUMBERS, CASES),
+      (hqvocab.biblion, NUMBERS, CASES),
+      (hqvocab.ergon, NUMBERS, CASES),
+      (hqvocab.theos, NUMBERS, CASES),
+      (hqvocab.hodos, NUMBERS, CASES),
       ]
   num_optional[1] = 10
 
@@ -40,7 +49,7 @@ if __name__ == '__main__':
   optional[2] = [
       (hqvocab.keleuw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
       (hqvocab.luw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
-      (hqvocab.pempw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE])
+      (hqvocab.pempw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
       ]
   num_optional[2] = 10
 
