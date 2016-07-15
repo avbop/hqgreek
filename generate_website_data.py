@@ -8,6 +8,7 @@ FILE_TEMPLATE = '{outdir}/unit{unit:d}.json'
 
 PERSONS = [FIRST, SECOND, THIRD]
 NUMBERS = [SINGULAR, PLURAL]
+CASES = [NOMINATIVE, GENITIVE, DATIVE, ACCUSATIVE]
 
 if __name__ == '__main__':
   if len(sys.argv) != 2:
@@ -21,7 +22,9 @@ if __name__ == '__main__':
 
   required[1] = [
       (hqvocab.paideuw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE]),
-      (hqvocab.pempw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE])
+      (hqvocab.pempw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.texnh, NUMBERS, CASES),
+      (hqvocab.xwra, NUMBERS, CASES)
       ]
   optional[1] = []
   num_optional[1] = 0
