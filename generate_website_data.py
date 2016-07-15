@@ -23,11 +23,16 @@ if __name__ == '__main__':
   required[1] = [
       (hqvocab.paideuw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE]),
       (hqvocab.pempw, [THIRD], [SINGULAR], [PRESENT], [INDICATIVE], [ACTIVE]),
-      (hqvocab.texnh, NUMBERS, CASES),
-      (hqvocab.xwra, NUMBERS, CASES)
+      (hqvocab.texne, NUMBERS, CASES),
+      (hqvocab.xwra, NUMBERS, CASES),
+      (hqvocab.agora, NUMBERS, CASES),
+      (hqvocab.psuche, NUMBERS, CASES)
       ]
-  optional[1] = []
-  num_optional[1] = 0
+  optional[1] = [
+      (hqvocab.maxe, NUMBERS, CASES),
+      (hqvocab.oikia, NUMBERS, CASES),
+      ]
+  num_optional[1] = 10
 
   required[2] = [
       (hqvocab.paideuw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),

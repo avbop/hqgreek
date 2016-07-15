@@ -23,5 +23,5 @@ def test_first_alpha():
   assert first.alpha(decl, [SINGULAR, GENITIVE]) == ['ἀγορᾶς']
 
 def test_hqvocab():
-  assert hqvocab.texnh.decline([SINGULAR, DATIVE]) == ['τέχνῃ']
+  assert hqvocab.texne.decline([SINGULAR, DATIVE]) == ['τέχνῃ']
   assert hqvocab.xwra.decline([PLURAL, DATIVE]) == ['χώραις']
