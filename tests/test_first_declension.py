@@ -43,6 +43,16 @@ def test_first_omicron_neuter():
   assert decl[0](decl, [NEUTER, PLURAL, ACCUSATIVE]) == ['δῶρα']
   assert decl[0](decl, [NEUTER, PLURAL, VOCATIVE]) == ['δῶρα']
 
+def test_first_omicron_feminine():
+  decl = (first.omicron, 'νησ', a.PERSISTENT_PENULT)
+  assert decl[0](decl, [FEMININE, SINGULAR, NOMINATIVE]) == ['νῆσος']
+  assert decl[0](decl, [FEMININE, SINGULAR, VOCATIVE]) == ['νῆσε']
+  assert decl[0](decl, [FEMININE, SINGULAR, ACCUSATIVE]) == ['νῆσον']
+  assert decl[0](decl, [FEMININE, PLURAL, GENITIVE]) == ['νήσων']
+  assert decl[0](decl, [FEMININE, PLURAL, NOMINATIVE]) == ['νῆσοι']
+  assert decl[0](decl, [FEMININE, PLURAL, ACCUSATIVE]) == ['νήσους']
+  assert decl[0](decl, [FEMININE, PLURAL, VOCATIVE]) == ['νῆσοι']
+
 def test_hqvocab():
   assert hqvocab.texne.decline([SINGULAR, DATIVE]) == ['τέχνῃ']
   assert hqvocab.xwra.decline([PLURAL, DATIVE]) == ['χώραις']

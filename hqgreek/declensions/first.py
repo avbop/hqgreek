@@ -112,7 +112,7 @@ def omicron(args, morph):
       word = accent.accentuate(root + 'ους', accent_type)
     words.append(word)
   elif VOCATIVE in morph:
-    if set([SINGULAR, MASCULINE]).issubset(morph):
+    if SINGULAR in morph and NEUTER not in morph:
       word = accent.accentuate(root + 'ε', accent_type)
       words.append(word)
     else:
