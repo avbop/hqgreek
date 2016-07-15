@@ -5,6 +5,9 @@ def eta(args, morph):
   _, root, accent_type = args
   morph = set(morph)
   words = []
+  if GENITIVE in morph or DATIVE in morph:
+    if accent_type == accent.PERSISTENT_ULT_ACUTE:
+      accent_type = accent.PERSISTENT_ULT_CIRCUMFLEX
   if set([SINGULAR, NOMINATIVE]).issubset(morph):
     word = accent.accentuate(root + 'η', accent_type)
     words.append(word)
@@ -27,6 +30,9 @@ def alpha(args, morph):
   _, root, accent_type = args
   morph = set(morph)
   words = []
+  if GENITIVE in morph or DATIVE in morph:
+    if accent_type == accent.PERSISTENT_ULT_ACUTE:
+      accent_type = accent.PERSISTENT_ULT_CIRCUMFLEX
   if set([SINGULAR, NOMINATIVE]).issubset(morph):
     word = accent.accentuate(root + 'α-', accent_type)
     words.append(word)

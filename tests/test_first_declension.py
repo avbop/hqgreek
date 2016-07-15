@@ -10,6 +10,8 @@ def test_first_eta():
   assert first.eta(decl, [SINGULAR, NOMINATIVE]) == ['τέχνη']
   assert first.eta(decl, [SINGULAR, ACCUSATIVE]) == ['τέχνην']
   assert first.eta(decl, [PLURAL, GENITIVE]) == ['τεχνῶν']
+  decl = (first.eta, 'ψυ-χ', a.PERSISTENT_ULT_ACUTE)
+  assert first.eta(decl, [SINGULAR, GENITIVE]) == ['ψυχῆς']
 
 def test_first_alpha():
   decl = (first.alpha, 'χωρ', a.PERSISTENT_PENULT)
@@ -17,6 +19,8 @@ def test_first_alpha():
   assert first.alpha(decl, [SINGULAR, ACCUSATIVE]) == ['χώραν']
   assert first.alpha(decl, [PLURAL, GENITIVE]) == ['χωρῶν']
   assert first.alpha(decl, [PLURAL, NOMINATIVE]) == ['χῶραι']
+  decl = (first.alpha, 'ἀγορ', a.PERSISTENT_ULT_ACUTE)
+  assert first.alpha(decl, [SINGULAR, GENITIVE]) == ['ἀγορᾶς']
 
 def test_hqvocab():
   assert hqvocab.texnh.decline([SINGULAR, DATIVE]) == ['τέχνῃ']
