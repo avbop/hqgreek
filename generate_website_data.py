@@ -44,14 +44,14 @@ if __name__ == '__main__':
   num_optional[1] = 10
 
   required[2] = [
-      (hqvocab.paideuw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.paideuw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
       ]
   optional[2] = [
-      (hqvocab.keleuw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
-      (hqvocab.luw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
-      (hqvocab.pempw, PERSONS, NUMBERS, [PRESENT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.keleuw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.luw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.pempw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
       ]
-  num_optional[2] = 10
+  num_optional[2] = 20
 
   for i in range(1, 3):
     required_data = []
