@@ -92,7 +92,8 @@ class Word:
 class Verb(Word):
   """Represent a verb."""
 
-  def __init__(self, english=None, present=None):
+  def __init__(self, english=None, present=None, imperfect=None, future=None,
+               aorist=None):
     """Create a new verb, describing its morphology system.
 
     english: an English description of the word
@@ -101,6 +102,9 @@ class Verb(Word):
     """
     super().__init__(english=english)
     self._present = present
+    self._imperfect = imperfect
+    self._future = future
+    self._aorist = aorist
     self._all_forms_tuple = ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,
         m.PLURAL], [m.PRESENT, m.IMPERFECT, m.PERFECT, m.AORIST, m.PLUPERFECT,
         m.FUTURE, m.FUTUREPERFECT], [m.SUBJUNCTIVE, m.OPTATIVE, m.INDICATIVE,
@@ -109,6 +113,12 @@ class Verb(Word):
   def _morphology(self, morph):
     if m.PRESENT in morph and self._present:
       return self._present[0](self._present, morph)
+    elif m.IMPERFECT in morph and self._imperfect:
+      return self._imperfect[0](self._imperfect, morph)
+    elif m.FUTURE in morph and self._future:
+      return self._future[0](self._future, morph)
+    elif m.AORIST in morph and self._aorist:
+      return self._aorist[0](self._aorist, morph)
     else:
       raise m.InvalidMorphologyError
 
