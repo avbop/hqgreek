@@ -92,24 +92,23 @@ class Word:
 class Verb(Word):
   """Represent a verb."""
 
-  def __init__(self, english=None, present=(None, None)):
+  def __init__(self, english=None, present=None):
     """Create a new verb, describing its morphology system.
 
     english: an English description of the word
-    present: a tuple: (function from hqgreek.conjugations, base form of verb in
-      present tense system)
+    present: a tuple; the first item must be a conjugation function, and the
+      whole tuple will be passed as an argument to this function
     """
     super().__init__(english=english)
-    self._present_func = present[0]
-    self._present_base = present[1]
+    self._present = present
     self._all_forms_tuple = ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,
         m.PLURAL], [m.PRESENT, m.IMPERFECT, m.PERFECT, m.AORIST, m.PLUPERFECT,
         m.FUTURE, m.FUTUREPERFECT], [m.SUBJUNCTIVE, m.OPTATIVE, m.INDICATIVE,
         m.INFINITIVE, m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE])
 
   def _morphology(self, morph):
-    if m.PRESENT in morph:
-      return self._present_func(self._present_base, morph)
+    if m.PRESENT in morph and self._present:
+      return self._present[0](self._present, morph)
     else:
       raise m.InvalidMorphologyError
 

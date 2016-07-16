@@ -5,7 +5,7 @@ from hqgreek.conjugations import omega
 from hqgreek.morphology import *
 
 def test_omega_present():
-  assert omega.present('λυ-', [FIRST, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == ['λύω']
+  assert omega.present((omega.present, 'λυ-'), [FIRST, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == ['λύω']
 
 def test_hqvocab():
   assert hqvocab.luw.conjugate([FIRST, SINGULAR, PRESENT, INDICATIVE,

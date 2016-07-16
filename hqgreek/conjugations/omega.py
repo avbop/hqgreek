@@ -1,7 +1,8 @@
 from hqgreek import accent
 from hqgreek.morphology import *
 
-def present(root, morph):
+def present(args, morph):
+  _, root = args
   words = []
   if set([FIRST, SINGULAR, PRESENT, INDICATIVE, ACTIVE]) == set(morph):
     words.append(root + 'ω')
