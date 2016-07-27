@@ -4,7 +4,8 @@ WEBDIR=web
 JSONDIR=$(WEBDIR)/data
 SPHINX_API=sphinx-apidoc --no-toc --force -o $(DOCDIR)/api
 TMPDIR=/tmp/hqgreek
-REPO_URL=git@github.com:avbop/hqgreek.git
+ISSUES_FILE=issues.html
+GITHUB_REPO=avbop/hqgreek
 
 all: test doc json site
 travis: test doc json
@@ -31,7 +32,7 @@ site: test sitedata
 	# Make sure we're on the master branch.
 	git branch --no-color | grep "* master"
 	mkdir $(TMPDIR)
-	cd $(TMPDIR) && git clone -b gh-pages $(REPO_URL)
+	cd $(TMPDIR) && git clone -b gh-pages git@github.com:$(GITHUB_REPO).git
 	cd $(TMPDIR)/hqgreek && git rm -rf * && git commit -m "Clearing gh-pages via makefile."
 	cp -r $(WEBDIR)/. $(TMPDIR)/hqgreek
 	cp -r $(DOCDIR)/_build/html $(TMPDIR)/hqgreek/docs
@@ -44,6 +45,9 @@ site: test sitedata
 server: sitedata
 	cd $(WEBDIR) && python3 -m http.server 8080
 
+issues:
+	handkerchief -a -o $(ISSUES_FILE) $(GITHUB_REPO)
+
 clean:
 	rm -r $(DOCDIR)/api
 	rm -r $(DOCDIR)/_build
@@ -51,5 +55,5 @@ clean:
 	rm -r $(WEBDIR)/docs
 	rm -r $(WEBDIR)/favicon.png
 
-.PHONY: all, test, doc, clean, travis, json, server, sitedata
+.PHONY: all, test, doc, clean, travis, json, server, sitedata, issues
 .IGNORE: clean
