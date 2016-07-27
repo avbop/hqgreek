@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hqgreek.conjugations.omega &mdash; hqgreek 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="hqgreek 0.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hqgreek.conjugations.omega</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">hqgreek</span> <span class="kn">import</span> <span class="n">accent</span>
+<span class="kn">from</span> <span class="nn">hqgreek.morphology</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">_accentuate_words</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Accentuate a list of words.</span>
+
+<span class="sd">  If an item in the list is a tuple, the first item in the tuple is used as the</span>
+<span class="sd">  word to be accented and the second as the type of accent. Otherwise,</span>
+<span class="sd">  recessive accent is assumed.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">form</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+    <span class="n">word</span><span class="p">,</span> <span class="n">accent_type</span> <span class="o">=</span> <span class="n">form</span>
+    <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">accent</span><span class="o">.</span><span class="n">accentuate</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">accent_type</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">accent_type</span><span class="o">=</span><span class="n">accent</span><span class="o">.</span><span class="n">RECESSIVE</span><span class="p">):</span>
+  <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">accent_type</span><span class="p">))</span>
+
+<div class="viewcode-block" id="present"><a class="viewcode-back" href="../../../api/hqgreek.conjugations.html#hqgreek.conjugations.omega.present">[docs]</a><span class="k">def</span> <span class="nf">present</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+  <span class="n">_</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">args</span>
+  <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="c1"># Turn requests for middle voice into passive voice, since the forms are the</span>
+  <span class="c1"># same.</span>
+  <span class="k">if</span> <span class="n">MIDDLE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+    <span class="n">new_morph</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new_morph</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">MIDDLE</span><span class="p">)</span>
+    <span class="n">new_morph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PASSIVE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">present</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">new_morph</span><span class="p">)</span>
+  <span class="c1"># Active indicative.</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ω&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;εις&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ει&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ομεν&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ετε&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ουσιν&#39;</span><span class="p">)</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ουσι&#39;</span><span class="p">)</span>
+  <span class="c1"># Middle/passive indicative.</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ομαι&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ει&#39;</span><span class="p">)</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ῃ&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;εται&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ομεθα&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;εσθε&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">PRESENT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ονται&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">INFINITIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">ACTIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+      <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ειν&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">MIDDLE</span> <span class="ow">in</span> <span class="n">morph</span> <span class="ow">or</span> <span class="n">PASSIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+      <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;εσθαι&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="n">InvalidMorphologyError</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">InvalidMorphologyError</span>
+  <span class="n">_accentuate_words</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">words</span></div>
+
+<div class="viewcode-block" id="imperfect"><a class="viewcode-back" href="../../../api/hqgreek.conjugations.html#hqgreek.conjugations.omega.imperfect">[docs]</a><span class="k">def</span> <span class="nf">imperfect</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+  <span class="n">_</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">args</span>
+  <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="c1"># Turn requests for middle voice into passive voice, since the forms are the</span>
+  <span class="c1"># same.</span>
+  <span class="k">if</span> <span class="n">MIDDLE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+    <span class="n">new_morph</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new_morph</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">MIDDLE</span><span class="p">)</span>
+    <span class="n">new_morph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PASSIVE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">imperfect</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">new_morph</span><span class="p">)</span>
+  <span class="c1"># Active indicative.</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ον&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ες&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ε&#39;</span><span class="p">)</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;εν&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ομεν&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ετε&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ον&#39;</span><span class="p">)</span>
+  <span class="c1"># Middle/passive indicative.</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ομην&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ου&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ετο&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;ομεθα&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;εσθε&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">IMPERFECT</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">PASSIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;οντο&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">InvalidMorphologyError</span>
+  <span class="n">_accentuate_words</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">words</span></div>
+
+<div class="viewcode-block" id="future"><a class="viewcode-back" href="../../../api/hqgreek.conjugations.html#hqgreek.conjugations.omega.future">[docs]</a><span class="k">def</span> <span class="nf">future</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+  <span class="n">_</span><span class="p">,</span> <span class="n">active_root</span><span class="p">,</span> <span class="n">passive_root</span> <span class="o">=</span> <span class="n">args</span>
+  <span class="c1"># These are the same endings as the present system.</span>
+  <span class="n">new_morph</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+  <span class="n">new_morph</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">FUTURE</span><span class="p">)</span>
+  <span class="n">new_morph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PRESENT</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">PASSIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+    <span class="n">new_args</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">passive_root</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">new_args</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">active_root</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">present</span><span class="p">(</span><span class="n">new_args</span><span class="p">,</span> <span class="n">new_morph</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="aorist"><a class="viewcode-back" href="../../../api/hqgreek.conjugations.html#hqgreek.conjugations.omega.aorist">[docs]</a><span class="k">def</span> <span class="nf">aorist</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
+  <span class="n">_</span><span class="p">,</span> <span class="n">active_root</span><span class="p">,</span> <span class="n">active_root_unaugmented</span><span class="p">,</span>\
+      <span class="n">passive_root</span><span class="p">,</span> <span class="n">passive_root_unaugmented</span> <span class="o">=</span> <span class="n">args</span>
+  <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="c1"># Active indicative.</span>
+  <span class="k">if</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">AORIST</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;α&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">AORIST</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;ας&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">SINGULAR</span><span class="p">,</span> <span class="n">AORIST</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;ε&#39;</span><span class="p">)</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;εν&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">FIRST</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">AORIST</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;αμεν&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">AORIST</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;ατε&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="nb">set</span><span class="p">([</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">PLURAL</span><span class="p">,</span> <span class="n">AORIST</span><span class="p">,</span> <span class="n">INDICATIVE</span><span class="p">,</span> <span class="n">ACTIVE</span><span class="p">])</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+    <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root</span> <span class="o">+</span> <span class="s1">&#39;αν&#39;</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">INFINITIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">ACTIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+      <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root_unaugmented</span> <span class="o">+</span> <span class="s1">&#39;αι&#39;</span><span class="p">,</span> <span class="n">accent_type</span><span class="o">=</span><span class="n">accent</span><span class="o">.</span><span class="n">PERSISTENT_PENULT</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">MIDDLE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+      <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">active_root_unaugmented</span> <span class="o">+</span> <span class="s1">&#39;ασθαι&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">PASSIVE</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">:</span>
+      <span class="n">_add_form</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">passive_root_unaugmented</span> <span class="o">+</span> <span class="s1">&#39;ηναι&#39;</span><span class="p">,</span> <span class="n">accent_type</span><span class="o">=</span><span class="n">accent</span><span class="o">.</span><span class="n">PERSISTENT_PENULT</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="n">InvalidMorphologyError</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">InvalidMorphologyError</span>
+  <span class="n">_accentuate_words</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">words</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
