@@ -107,3 +107,12 @@ def test_many_forms():
        'first plural present indicative active',
        'second singular present indicative active',
        'second plural present indicative active'])
+
+def test_all_forms():
+  def test_conj(args, morph):
+    if set(morph) == set([FIRST, SINGULAR, PRESENT, INDICATIVE, ACTIVE]):
+      return ['παιδεύω']
+    else:
+      raise InvalidMorphologyError
+  paideuw = hqgreek.Verb(present=(test_conj, 'παιδευ'))
+  assert paideuw.all_forms() == [['παιδεύω']]

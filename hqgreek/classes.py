@@ -7,7 +7,7 @@ class Word:
   """
 
   def __init__(self, english=None):
-    self._all_forms_tuple = ([])
+    self._all_forms = (([]),)
     self.english = english
     self._specials = dict()
 
@@ -85,8 +85,19 @@ class Word:
       return words
 
   def all_forms(self, include_translations=False):
-    return self.many_forms(self._all_forms_tuple,
-        include_translations=include_translations)
+    if include_translations:
+      ret = ([], [])
+    else:
+      ret = []
+    for forms in self._all_forms:
+      conjugations = self.many_forms(forms,
+          include_translations=include_translations)
+      if include_translations:
+        ret[0].extend(conjugations[0]) # The conjugated forms.
+        ret[1].extend(conjugations[1]) # The translations.
+      else:
+        ret.extend(conjugations) # Just the conjugated forms.
+    return ret
 
 
 class Verb(Word):
@@ -105,10 +116,16 @@ class Verb(Word):
     self._imperfect = imperfect
     self._future = future
     self._aorist = aorist
-    self._all_forms_tuple = ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,
+    self._all_forms = (
+      # Finite verb forms.
+      ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,
         m.PLURAL], [m.PRESENT, m.IMPERFECT, m.PERFECT, m.AORIST, m.PLUPERFECT,
         m.FUTURE, m.FUTUREPERFECT], [m.SUBJUNCTIVE, m.OPTATIVE, m.INDICATIVE,
-        m.INFINITIVE, m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE])
+        m.INFINITIVE, m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE]),
+      # Infinitives.
+      ([m.PRESENT, m.PERFECT, m.AORIST, m.FUTURE], [m.ACTIVE, m.PASSIVE,
+        m.MIDDLE], [m.INFINITIVE])
+    )
 
   def _morphology(self, morph):
     if m.PRESENT in morph and self._present:
@@ -140,8 +157,9 @@ class Noun(Word):
       whole tuple will be passed as an argument to this function
     """
     super().__init__(english=english)
-    self._all_forms_tuple = ([m.FEMININE, m.MASCULINE, m.NEUTER], [m.SINGULAR,
-      m.PLURAL], [m.NOMINATIVE, m.GENITIVE, m.DATIVE, m.ACCUSATIVE, m.VOCATIVE])
+    self._all_forms = (([m.FEMININE, m.MASCULINE, m.NEUTER], [m.SINGULAR,
+        m.PLURAL], [m.NOMINATIVE, m.GENITIVE, m.DATIVE, m.ACCUSATIVE,
+        m.VOCATIVE]),)
     self._declension = declension
     self.gender = gender
 
