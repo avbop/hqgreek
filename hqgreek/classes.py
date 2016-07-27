@@ -121,7 +121,7 @@ class Verb(Word):
       ([m.FIRST, m.SECOND, m.THIRD], [m.SINGULAR,
         m.PLURAL], [m.PRESENT, m.IMPERFECT, m.PERFECT, m.AORIST, m.PLUPERFECT,
         m.FUTURE, m.FUTUREPERFECT], [m.SUBJUNCTIVE, m.OPTATIVE, m.INDICATIVE,
-        m.INFINITIVE, m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE]),
+        m.IMPERATIVE], [m.PASSIVE, m.ACTIVE, m.MIDDLE]),
       # Infinitives.
       ([m.PRESENT, m.PERFECT, m.AORIST, m.FUTURE], [m.ACTIVE, m.PASSIVE,
         m.MIDDLE], [m.INFINITIVE])

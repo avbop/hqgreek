@@ -45,11 +45,15 @@ if __name__ == '__main__':
 
   required[2] = [
       (hqvocab.paideuw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.paideuw, [PRESENT, AORIST], [INFINITIVE], [ACTIVE]),
       ]
   optional[2] = [
       (hqvocab.keleuw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
       (hqvocab.luw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
       (hqvocab.pempw, PERSONS, NUMBERS, [PRESENT, FUTURE, AORIST, IMPERFECT], [INDICATIVE], [ACTIVE]),
+      (hqvocab.pempw, [PRESENT, AORIST], [INFINITIVE], [ACTIVE]),
+      (hqvocab.keleuw, [PRESENT, AORIST], [INFINITIVE], [ACTIVE]),
+      (hqvocab.luw, [PRESENT, AORIST], [INFINITIVE], [ACTIVE]),
       ]
   num_optional[2] = 20
 
