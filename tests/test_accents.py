@@ -44,3 +44,7 @@ def test_persistent_accent():
   assert accent.accentuate('ἀδελφον', accent.PERSISTENT_ULT_ACUTE) == 'ἀδελφόν'
   assert accent.accentuate('τον', accent.PERSISTENT_ULT_ACUTE) == 'τόν'
   assert accent.accentuate('χρυ-σου', accent.PERSISTENT_ULT_CIRCUMFLEX) == 'χρυσοῦ'
+
+def test_optative_accent():
+  assert accent.accentuate('παιδευοι', accent.RECESSIVE, optative=True) == 'παιδεύοι'
+  assert accent.accentuate('ἀνθρωποι', accent.PERSISTENT_ANTEPENULT, optative=False) == 'ἄνθρωποι'
