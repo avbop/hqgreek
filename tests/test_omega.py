@@ -69,12 +69,18 @@ def test_omega_future_passive():
   assert data[0](data, [FUTURE, SINGULAR, THIRD, INDICATIVE, PASSIVE]) == ['λυθήσεται']
 
 def test_omega_aorist_active():
-  data = (omega.aorist, 'ἐπαιδευσ', None)
+  data = (omega.aorist, 'ἐπαιδευσ', None, None, None)
   assert data[0](data, [FIRST, SINGULAR, AORIST, INDICATIVE, ACTIVE]) == ['ἐπαίδευσα']
   assert data[0](data, [PLURAL, SECOND, AORIST, INDICATIVE, ACTIVE]) == ['ἐπαιδεύσατε']
-  data = (omega.aorist, 'ἐλυ-σ', None)
+  data = (omega.aorist, 'ἐλυ-σ', None, None, None)
   assert data[0](data, [FIRST, SINGULAR, AORIST, INDICATIVE, ACTIVE]) == ['ἔλυσα']
   assert data[0](data, [AORIST, SINGULAR, THIRD, INDICATIVE, ACTIVE]) == ['ἔλυσε', 'ἔλυσεν']
+
+def test_infinitives():
+  assert hqvocab.paideuw.conjugate([PRESENT, ACTIVE, INFINITIVE]) == ['παιδεύειν']
+  assert hqvocab.pempw.conjugate([PRESENT, PASSIVE, INFINITIVE]) == ['πέμπεσθαι']
+  assert hqvocab.luw.conjugate([AORIST, MIDDLE, INFINITIVE]) == ['λύσασθαι']
+  assert hqvocab.keleuw.conjugate([AORIST, ACTIVE, INFINITIVE]) == ['κελεῦσαι']
 
 def test_hqvocab():
   assert hqvocab.paideuw.conjugate([FIRST, SINGULAR, PRESENT, INDICATIVE,
