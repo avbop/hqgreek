@@ -1,0 +1,30 @@
+hqvocab package
+===============
+
+Submodules
+----------
+
+hqvocab.first_declension_nouns module
+-------------------------------------
+
+.. automodule:: hqvocab.first_declension_nouns
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+hqvocab.omega_verbs module
+--------------------------
+
+.. automodule:: hqvocab.omega_verbs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: hqvocab
+    :members:
+    :undoc-members:
+    :show-inheritance:
