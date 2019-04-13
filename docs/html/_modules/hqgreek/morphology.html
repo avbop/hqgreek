@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>hqgreek.morphology &#8212; hqgreek 0.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for hqgreek.morphology</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="InvalidMorphologyError"><a class="viewcode-back" href="../../api/hqgreek.html#hqgreek.morphology.InvalidMorphologyError">[docs]</a><span></span><span class="k">class</span> <span class="nc">InvalidMorphologyError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+  <span class="k">pass</span></div>
+
+<span class="c1"># Constants used to describe morphology.</span>
+<span class="c1"># Person</span>
+<span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)</span>
+<span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;third&#39;</span><span class="p">)</span>
+<span class="c1"># Number</span>
+<span class="n">SINGULAR</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;singular&#39;</span><span class="p">)</span>
+<span class="n">PLURAL</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;plural&#39;</span><span class="p">)</span>
+<span class="c1"># Tense</span>
+<span class="n">PRESENT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;present&#39;</span><span class="p">)</span>
+<span class="n">PERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;perfect&#39;</span><span class="p">)</span>
+<span class="n">IMPERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="s1">&#39;imperfect&#39;</span><span class="p">)</span>
+<span class="n">AORIST</span> <span class="o">=</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="s1">&#39;aorist&#39;</span><span class="p">)</span>
+<span class="n">PLUPERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;pluperfect&#39;</span><span class="p">)</span>
+<span class="n">FUTURE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;future&#39;</span><span class="p">)</span>
+<span class="n">FUTUREPERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="s1">&#39;futureperfect&#39;</span><span class="p">)</span>
+<span class="c1"># Mood</span>
+<span class="n">INDICATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;indicative&#39;</span><span class="p">)</span>
+<span class="n">IMPERATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;imperative&#39;</span><span class="p">)</span>
+<span class="n">SUBJUNCTIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;subjunctive&#39;</span><span class="p">)</span>
+<span class="n">OPTATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;optative&#39;</span><span class="p">)</span>
+<span class="c1"># Other forms</span>
+<span class="n">INFINITIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;infinitive&#39;</span><span class="p">)</span>
+<span class="n">PARTICIPLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="s1">&#39;participle&#39;</span><span class="p">)</span>
+<span class="c1"># Voice</span>
+<span class="n">ACTIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">)</span>
+<span class="n">PASSIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">51</span><span class="p">,</span> <span class="s1">&#39;passive&#39;</span><span class="p">)</span>
+<span class="n">MIDDLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="s1">&#39;middle&#39;</span><span class="p">)</span>
+<span class="c1"># Gender</span>
+<span class="n">MASCULINE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;masculine&#39;</span><span class="p">)</span>
+<span class="n">FEMININE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">61</span><span class="p">,</span> <span class="s1">&#39;feminine&#39;</span><span class="p">)</span>
+<span class="n">NEUTER</span> <span class="o">=</span> <span class="p">(</span><span class="mi">62</span><span class="p">,</span> <span class="s1">&#39;neuter&#39;</span><span class="p">)</span>
+<span class="c1"># Case</span>
+<span class="n">NOMINATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s1">&#39;nominative&#39;</span><span class="p">)</span>
+<span class="n">GENITIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;genitive&#39;</span><span class="p">)</span>
+<span class="n">DATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">72</span><span class="p">,</span> <span class="s1">&#39;dative&#39;</span><span class="p">)</span>
+<span class="n">ACCUSATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">73</span><span class="p">,</span> <span class="s1">&#39;accusative&#39;</span><span class="p">)</span>
+<span class="n">VOCATIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">74</span><span class="p">,</span> <span class="s1">&#39;vocative&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="expand_form"><a class="viewcode-back" href="../../api/hqgreek.html#hqgreek.morphology.expand_form">[docs]</a><span class="k">def</span> <span class="nf">expand_form</span><span class="p">(</span><span class="n">morph</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Give an expanded English phrasing of morph.&quot;&quot;&quot;</span>
+  <span class="n">morph</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+  <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">form</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="n">morph</span><span class="p">])</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">hqgreek</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/hqgreek.html">hqgreek package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/hqvocab.html">hqvocab package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
