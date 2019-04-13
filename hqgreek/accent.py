@@ -10,7 +10,9 @@ def accentuate(word, accent, optative=False):
 
   word: be a word in Greek, with long ι, υ, α followed by a hyphen (-).
     ᾳ (etc) can only be long and should not be followed by a hyphen.
+
   accent: be one of the constants defined in this file.
+
   optative: whether the word is in the optative (determines length of final
     diphthongs)
   """
