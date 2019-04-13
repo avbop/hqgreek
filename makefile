@@ -4,7 +4,6 @@ WEBDIR=web
 JSONDIR=$(WEBDIR)/data
 SPHINX_API=sphinx-apidoc --no-toc --force -o $(DOCDIR)/api
 TMPDIR=/tmp/hqgreek
-ISSUES_FILE=issues.html
 GITHUB_REPO=avbop/hqgreek
 
 all: test doc json site
@@ -45,9 +44,6 @@ site: test sitedata
 server: sitedata
 	cd $(WEBDIR) && python3 -m http.server 8080
 
-issues:
-	handkerchief -a -o $(ISSUES_FILE) $(GITHUB_REPO)
-
 clean:
 	rm -r $(DOCDIR)/api
 	rm -r $(DOCDIR)/_build
@@ -55,5 +51,5 @@ clean:
 	rm -r $(WEBDIR)/docs
 	rm -r $(WEBDIR)/favicon.png
 
-.PHONY: all, test, doc, clean, travis, json, server, sitedata, issues
+.PHONY: all, test, doc, clean, travis, json, server, sitedata
 .IGNORE: clean
